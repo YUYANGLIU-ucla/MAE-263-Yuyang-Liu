@@ -2,8 +2,6 @@
 
 ## Run
 
-Open a terminal in this folder. Install dependencies once:
-
 
 
 Run all Q1--Q11 calculations:
