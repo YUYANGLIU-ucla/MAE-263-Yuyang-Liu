@@ -2,11 +2,7 @@
 
 ## Run
 
-Open a terminal in this folder. Install NumPy once using the same interpreter:
 
-```powershell
-py -3.11 -m pip install -r requirements.txt
-```
 
 Run all Q1--Q11 calculations and explanations:
 
