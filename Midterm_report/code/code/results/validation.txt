@@ -1,0 +1,61 @@
+1. DERIVATIVES
+   vectorized vs course routines: gradient 2.5e-17, Hessian 3.1e-16 (relative)
+   centered finite differences (random state, with natural curvature): gradient 2.0e-08, Hessian 2.8e-08
+
+2. BUCKLING (N = 80)
+   eps=0.002: w0/L sim 0.02787, elastica 0.02786 (+0.03%), small-eps 0.02847 (-2.11%);  P L^2/EI sim 39.500, elastica 39.516 (-0.04%)
+   eps=0.005: w0/L sim 0.04459, elastica 0.04457 (+0.03%), small-eps 0.04502 (-0.95%);  P L^2/EI sim 39.560, elastica 39.576 (-0.04%)
+   eps=0.010: w0/L sim 0.06322, elastica 0.06320 (+0.03%), small-eps 0.06366 (-0.70%);  P L^2/EI sim 39.661, elastica 39.675 (-0.04%)
+   eps=0.020: w0/L sim 0.08931, elastica 0.08928 (+0.03%), small-eps 0.09003 (-0.81%);  P L^2/EI sim 39.864, elastica 39.876 (-0.03%)
+   eps=0.030: w0/L sim 0.10911, elastica 0.10908 (+0.03%), small-eps 0.11027 (-1.05%);  P L^2/EI sim 40.069, elastica 40.079 (-0.02%)
+   eps=0.040: w0/L sim 0.12563, elastica 0.12559 (+0.03%), small-eps 0.12732 (-1.33%);  P L^2/EI sim 40.277, elastica 40.284 (-0.02%)
+   eps=0.050: w0/L sim 0.14003, elastica 0.14000 (+0.03%), small-eps 0.14235 (-1.63%);  P L^2/EI sim 40.487, elastica 40.492 (-0.01%)
+
+3. STATIC SNAP-THROUGH UNDER A POINT FORCE (N = 80)
+   midpoint, displacement control, eps=1%: peak force 12.881 (theory 12.844, +0.29%)
+   slope of asymmetric branch 208.59 (Pandey et al.: 207.75, +0.41%)
+   energy barrier 1.2735 mJ (two-mode estimate (P2-P1) dL: 1.2684 mJ, +0.40%)
+   force control, eps=0.01: delta, F_cr sim, Yan et al., diff%
+      0.20    12.566    12.926  -2.78
+      0.25     9.425     9.615  -1.98
+      0.30     7.951     8.050  -1.22
+      0.35     7.394     7.442  -0.64
+      0.40     7.543     7.568  -0.33
+      0.45     8.577     8.604  -0.31
+      0.50    12.907    12.969  -0.48
+   force control, eps=0.03: delta, F_cr sim, Yan et al., diff%
+      0.20    21.929    22.389  -2.05
+      0.25    16.458    16.654  -1.18
+      0.30    13.940    13.943  -0.02
+      0.35    13.024    12.890  +1.04
+      0.40    13.321    13.108  +1.62
+      0.45    15.144    14.902  +1.62
+      0.50    22.809    22.463  +1.54
+
+4. DYNAMICS
+   N=40: lowest frequency of the arch 44.046/t* (theory, antisymmetric mode: 44.363, -0.71%)
+   N=80: lowest frequency of the arch 44.260/t* (theory, antisymmetric mode: 44.363, -0.23%)
+   N=160: lowest frequency of the arch 44.313/t* (theory, antisymmetric mode: 44.363, -0.11%)
+   implicit Euler, 50 steps/period: period error +0.51%, amplitude after 3 periods 31.1% (numerical damping only)
+   implicit Euler, 200 steps/period: period error +0.01%, amplitude after 3 periods 74.3% (numerical damping only)
+   implicit Euler, 800 steps/period: period error -0.02%, amplitude after 3 periods 92.8% (numerical damping only)
+   snap time from the equilibrium at the threshold, s_a=0.35 (no damping): 0.3:0.169, 0.1:0.248, 0.03:0.358, 0.01:0.488, 0.003:0.677, 0.001:0.905
+   fitted exponent for delta <= 0.03: -0.273 (Gomez et al.: -1/4)
+   step to 1.1 kcrit, dt=t*/1000: t_snap=0.1590 t*, numerical energy loss = 60.3% of the released elastic energy
+   step to 1.1 kcrit, dt=t*/4000: t_snap=0.1557 t*, numerical energy loss = 37.5% of the released elastic energy
+   step to 1.1 kcrit, dt=t*/16000: t_snap=0.1551 t*, numerical energy loss = 19.3% of the released elastic energy
+   same with the trapezoidal rule, dt=t*/4000: t_snap=0.1550 t*, energy error = +0.05% of the released elastic energy
+   same with the trapezoidal rule, dt=t*/16000: t_snap=0.1549 t*, energy error = +0.00% of the released elastic energy
+
+5. MESH CONVERGENCE (eps = 1%, patch s_a = 0.35, l_a = 0.2)
+   N  half-clamp   w0/L      P L^2/EI   F_hold L^2/EI   kcrit L    W_act [mJ]
+    20  0         0.06467   35.743     11.278          1.2443    0.4536
+    40  0         0.06397   37.697     12.114          1.2728    0.4594
+    80  0         0.06360   38.685     12.527          1.2881    0.4657
+   160  0         0.06340   39.182     12.732          1.2959    0.4688
+    20  1         0.06346   39.388     12.507          1.2930    0.4718
+    40  1         0.06327   39.606     12.827          1.3013    0.4711
+    80  1         0.06322   39.661     12.907          1.3032    0.4718
+   160  1         0.06321   39.674     12.927          1.3037    0.4719
+
+total time 135 s
